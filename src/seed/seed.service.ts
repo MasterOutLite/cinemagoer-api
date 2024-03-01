@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { roles, RoleUser } from "@src/const/role";
+import { roles } from "@src/const/role";
 import { ageRatings } from "@src/const/age-ratings";
 import { publishers } from "@src/const/publishers";
 import { genres } from "@src/const/genre";
@@ -52,19 +52,23 @@ export class SeedService {
 
   //region create seed
   async createSeed() {
+    console.log("Seed:", "Start seeding");
     await this.createSeedRole();
     await this.createSeedAgeRating();
     await this.createSeedPublisher();
     await this.createSeedGenre();
     await this.createSeedUser();
     await this.createSeedVideo();
+    console.log("Seed:", "End seeding");
   }
 
   async upsertSeed() {
+    console.log("Seed:", "Start seeding");
     await this.upsertSeedRole();
     await this.upsertSeedAgeRating();
     await this.upsertSeedPublisher();
     await this.upsertSeedGenre();
+    console.log("Seed:", "End seeding");
   }
 
   //endregion
@@ -130,12 +134,11 @@ export class SeedService {
   async createSeedUser() {
 
     for (const admin of admins) {
-      const member = await this.authService.registrationSeed(admin);
-      await this.usersService.updateRole({ userId: member.id, roleIds: [RoleUser.ADMIN] });
+      await this.authService.registration(admin, true);
     }
 
     for (const user of users) {
-      await this.authService.registration(user);
+      await this.authService.registration(user, false);
     }
 
     const countUserCreate = 40;
@@ -144,7 +147,7 @@ export class SeedService {
         email: faker.internet.email(),
         nickname: faker.internet.userName(),
         password: faker.internet.password()
-      });
+      }, false);
     }
   }
 

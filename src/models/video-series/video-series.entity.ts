@@ -1,36 +1,46 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Video from "@models/video/video.entity";
 import Season from "@models/season/season.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { DayOfWeek } from "@models/video-series/day-of-week";
 
-@Entity({name: 'video-series'})
+@Entity({ name: "video-series" })
 class VideoSeries {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ApiProperty({ example: 1, description: "ID" })
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @ManyToOne(() => Video, video => video.videoSeries)
-    video: Video;
-    @Column()
-    videoId: number;
+  @ManyToOne(() => Video, video => video.videoSeries)
+  video: Video;
+  @ApiProperty({ example: 1, description: "VideoID" })
+  @Column()
+  videoId: number;
 
-    @Column()
-    series: number;
+  @ApiProperty({ example: 1, description: "Series" })
+  @Column()
+  series: number;
 
-    @Column()
-    name: string;
+  @ApiProperty({ example: "Name series", description: "Name" })
+  @Column()
+  name: string;
 
-    @Column()
-    dateRelease: Date;
+  @ApiProperty({ example: new Date(), description: "Data release" })
+  @Column()
+  dateRelease: Date;
 
-    @Column({default: false})
-    release: boolean;
+  @ApiProperty({ example: true, description: "Release" })
+  @Column({ default: false })
+  release: boolean;
 
-    @ManyToOne(() => Season, season => season.videoSeries)
-    season: Season;
-    @Column({nullable: true})
-    seasonId: number;
+  @ManyToOne(() => Season, season => season.videoSeries)
+  season: Season;
+  @ApiProperty({ example: 1, description: "season " })
+  @Column({ nullable: true })
+  seasonId: number;
 
-    @Column({nullable: true})
-    dayOfWeek: number;
+  @ApiProperty({ enum: DayOfWeek, description: "DayOfWeek" })
+  @Column({ nullable: true })
+  dayOfWeek: DayOfWeek;
 
 }
 

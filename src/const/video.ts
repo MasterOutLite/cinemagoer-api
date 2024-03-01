@@ -3,10 +3,10 @@ import { AgeRating } from "@src/const/age-ratings";
 import { CreateVideoCombineDto } from "@models/video/dto/create-video-combine.dto";
 import { CreateSeasonDto } from "@models/season/dto/create-season.dto";
 import { DayOfWeek } from "@models/video-series/day-of-week";
-import { SeasonOfYear } from "@models/video/season-of-year";
-import { VideoCategory } from "@models/video/video-category";
-import { VideoStatus } from "@models/video/video-status";
-import { VideoType } from "@models/video/video-type";
+import { SeasonOfYear } from "@models/video/enum/season-of-year";
+import { VideoCategory } from "@models/video/enum/video-category";
+import { VideoStatus } from "@models/video/enum/video-status";
+import { VideoType } from "@models/video/enum/video-type";
 
 export const anime: CreateVideoCombineDto[] = [
   {
@@ -23,8 +23,8 @@ export const anime: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Winter,
     genreIds: [Genre.Drama, Genre.Adventures, Genre.Fantasy, Genre.Shonen],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 1,
     pictures: [],
     trailers: [],
@@ -131,8 +131,8 @@ export const anime: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Winter,
     genreIds: [Genre.Comedy, Genre.Adventures, Genre.Fantasy, Genre.Shonen],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 2,
     pictures: [],
     trailers: [],
@@ -216,8 +216,8 @@ export const anime: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Spring,
     genreIds: [Genre.Action, Genre.School, Genre.Fantasy, Genre.Shonen],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 13,
     pictures: [],
     icon: "1688704442_jjk_s2_done2.jpg",
@@ -367,8 +367,8 @@ export const anime: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Summer,
     genreIds: [Genre.Detective, Genre.Comedy, Genre.Shonen],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 14,
     icon: "7239b141b697f45559bce35346568e.jpg",
     duration: "~24 хв",
@@ -454,8 +454,8 @@ export const anime: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Fall,
     genreIds: [Genre.Mistica, Genre.Comedy],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 15,
     pictures: [],
     trailers: [],
@@ -545,8 +545,8 @@ export const movie: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Spring,
     genreIds: [Genre.Action, Genre.Melodrama, Genre.Adventures, Genre.Drama, Genre.Thriller, Genre.Fantastuka],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Movie,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Movie,
+    status: VideoStatus.ItComesOut,
     publisherId: 16,
     pictures: [],
     trailers: [],
@@ -572,8 +572,8 @@ export const movie: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Winter,
     genreIds: [Genre.Action, Genre.Thriller, Genre.Horrors],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 17,
     pictures: [],
     trailers: [],
@@ -598,8 +598,8 @@ export const movie: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Summer,
     genreIds: [Genre.Melodrama, Genre.Detective, Genre.Drama, Genre.Thriller],
     ageRatingId: AgeRating.R,
-    typeId: VideoType.Movie,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Movie,
+    status: VideoStatus.ItComesOut,
     publisherId: 18,
     pictures: [
       "1699410657_mv5bowuxntg0owetyzmyos00njzhlwi4zgitnmzkndkxmmy0mtawxkeyxkfqcgdeqxvymtuzmtg2odkz__v1_.jpg",
@@ -629,8 +629,8 @@ export const movie: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Fall,
     genreIds: [Genre.Drama, Genre.Crime],
     ageRatingId: AgeRating.R,
-    typeId: VideoType.Movie,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Movie,
+    status: VideoStatus.ItComesOut,
     publisherId: 19,
     pictures: [
       "1699409932_mv5bmdi1mzu3y2ytmmuymi00mtbilwjizmqtzgq5nwzhytflmtazxkeyxkfqcgdeqxvymtuzmtg2odkz__v1_.jpg",
@@ -653,8 +653,8 @@ export const movie: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Spring,
     genreIds: [Genre.Comedy],
     ageRatingId: AgeRating.SixteenPlus,
-    typeId: VideoType.Movie,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Movie,
+    status: VideoStatus.ItComesOut,
     publisherId: 20,
     pictures: [
       "1699185642_mv5byje2m2fhytqtnza1mi00ntkyltkyotytymnmnmuymdnhntc0xkeyxkfqcgdeqxvymtyzmty3ote3__v1_.jpg",
@@ -687,8 +687,8 @@ export const serials: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Winter,
     genreIds: [Genre.Melodrama, Genre.Comedy],
     ageRatingId: AgeRating.PG13,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 20,
     pictures: [
       "1550038059-5.jpg",
@@ -776,8 +776,8 @@ export const serials: CreateVideoCombineDto[] = [
     seasonOfYear: SeasonOfYear.Summer,
     genreIds: [Genre.Detective, Genre.Drama, Genre.Crime],
     ageRatingId: AgeRating.SixteenPlus,
-    typeId: VideoType.Serial,
-    statusId: VideoStatus.ItComesOut,
+    type: VideoType.Serial,
+    status: VideoStatus.ItComesOut,
     publisherId: 20,
     pictures: [
       "1689360937_1689360865_88.jpg",

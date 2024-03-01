@@ -86,8 +86,6 @@ export class VideoSeriesService {
     dateForWeek.setUTCDate(date.getDate() + 6);
     dateForWeek.setUTCHours(23, 59, 59, 59);
 
-    // console.log(date.toUTCString() + ' | ' + dateForWeek.toUTCString());
-
     for (const day of dayOfWeek) {
       const series = await this.videoSeriesRepository.find({
         where: {

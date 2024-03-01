@@ -1,19 +1,23 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Video from "@models/video/video.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
-@Entity({name: 'publisher'})
+@Entity({ name: "publisher" })
 class Publisher {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ApiProperty({ example: 1, description: "ID" })
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({unique: true})
-    name: string;
+  @ApiProperty({ example: "Sony pictures", description: "Name Publisher" })
+  @Column({ unique: true })
+  name: string;
 
-    @Column({type: 'text', nullable: true})
-    description: string;
+  @ApiProperty({ example: "About publisher", description: "Description" })
+  @Column({ type: "text", nullable: true })
+  description: string;
 
-    @OneToMany(() => Video, video => video.publisher)
-    video: Video[];
+  @OneToMany(() => Video, video => video.publisher)
+  video: Video[];
 }
 
 export default Publisher;

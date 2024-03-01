@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import UserListView from "@models/user-list-view/user-list-view.entity";
 import Video from "@models/video/video.entity";
 import { ListViewState } from "@models/user-list-view/list-view-state";
-import { VideoCategory } from "@models/video/video-category";
+import { VideoCategory } from "@models/video/enum/video-category";
 
 export class ResponseUserListViewDto {
 

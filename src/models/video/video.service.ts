@@ -10,7 +10,6 @@ import { ResponseVideoCombineDto } from "@models/video/dto/response-video-combin
 import Genre from "@models/genre/genre.entity";
 import Group from "@models/group/group.entity";
 import { CreateVideoInfoDto } from "@models/video-info/dto/create-video-info.dto";
-import { ResponseVideoInfoDto } from "@models/video-info/dto/response-video-info.dto";
 import { UpdateVideoDto } from "@models/video/dto/update-video.dto";
 import Publisher from "@models/publisher/publisher.entity";
 import AgeRating from "@models/age-rating/age-rating.entity";
@@ -22,6 +21,7 @@ import { GetVideoQuery } from "@models/video/query/get-video.query";
 import { ResponseVideoSeriesDto } from "@models/video-series/dto/response-video-series.dto";
 import { ResponseSeasonDto } from "@models/season/dto/response-season.dto";
 import VideoRate from "@models/video-rate/video-rate.entity";
+import { ResponseVideo } from "@models/video/dto/response-video";
 
 @Injectable()
 export class VideoService {
@@ -43,23 +43,13 @@ export class VideoService {
   ) {
   }
 
-  async create(dto: CreateVideoCombineDto, files): Promise<ResponseVideoCombineDto> {
+  async create(dto: CreateVideoCombineDto, files) {
     const videoDto: CreateVideoDto = dto;
 
     const existsAtr: {
       tag: string,
       exists: boolean
     }[] = [];
-    existsAtr.push({ tag: "seasonOfYearId", exists: dto.seasonOfYear <= 4 && dto.seasonOfYear >= 1 });
-    existsAtr.push({
-      tag: "typeId",
-      exists: true // await this.typeService.exists({ where: { id: videoDto.typeId } })
-    });
-    existsAtr.push({
-      tag: "statusId",
-      exists: true
-    })
-    ;
     existsAtr.push({
       tag: "genreIds",
       exists: await this.genreService.exists({
@@ -68,10 +58,6 @@ export class VideoService {
             id: In(videoDto.genreIds)
           }
       })
-    });
-    existsAtr.push({
-      tag: "videoCategoryId",
-      exists: true //await this.videoCategoryService.exists({ where: { id: videoDto.videoCategoryId } })
     });
     existsAtr.push({
       tag: "publisherId",
@@ -101,7 +87,7 @@ export class VideoService {
       throw new BadRequestException("Param name is not array!");
 
     if (files.icon && files.icon[0])
-      videoDto.icon = this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
+      videoDto.icon = await this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
 
     const entityVideo = this.videoRepository.create(videoDto);
     entityVideo.genre = await this.genreService.findBy({ id: In(videoDto.genreIds) });
@@ -124,9 +110,9 @@ export class VideoService {
 
     const videoInfoDto: CreateVideoInfoDto = dto;
     videoInfoDto.videoId = video.id;
-    const videoInfoRes: ResponseVideoInfoDto = await this.videoInfoService.create(videoInfoDto, files.trailers, files.pictures);
+    const videoInfo = await this.videoInfoService.create(videoInfoDto, files.trailers, files.pictures);
 
-    return new ResponseVideoCombineDto(reloadVideo, videoInfoRes);
+    return { video: reloadVideo, videoInfo } as ResponseVideo; //new ResponseVideoCombineDto(reloadVideo, videoInfoRes);
   }
 
   async update(dto: UpdateVideoDto, files) {
@@ -138,22 +124,8 @@ export class VideoService {
       tag: string,
       exists: boolean
     }[] = [];
-    if (dto.seasonOfYear)
-      existsAtr.push({ tag: "seasonOfYear", exists: dto.seasonOfYear <= 4 && dto.seasonOfYear >= 1 });
-    if (dto.typeId)
-      existsAtr.push({
-        tag: "typeId",
-        exists: true //await this.typeService.exists({ where: { id: dto.typeId } })
-      });
-    if (dto.statusId)
-      existsAtr.push({ tag: "statusId", exists: true });//await this.statusService.exists({ where: { id: dto.statusId } }) });
     if (dto.genreIds)
       existsAtr.push({ tag: "genreIds", exists: await this.genreService.exists({ where: { id: In(dto.genreIds) } }) });
-    if (dto.videoCategoryId)
-      existsAtr.push({
-        tag: "videoCategoryId",
-        exists: true  //await this.videoCategoryService.exists({ where: { id: dto.videoCategoryId } })
-      });
     if (dto.publisherId)
       existsAtr.push({
         tag: "publisherId",
@@ -175,7 +147,7 @@ export class VideoService {
     if (files.icon && files.icon[0]) {
       if (video.icon)
         this.filesService.removeFile(video.icon);
-      dto.icon = this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
+      dto.icon = await this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
     }
 
     if (dto.genreIds)
@@ -286,7 +258,7 @@ export class VideoService {
       throw new BadRequestException("Video id is bad!");
 
     const resVideo = { ...video, rate: Math.round(rate * 10) / 10, yourRate };
-    const resInfo = new ResponseVideoInfoDto(video.videoInfo[0]);
+    const resInfo = video.videoInfo[0];
     const resSeries = video.videoSeries.map(value => new ResponseVideoSeriesDto(value));
     const resSeason = video.season.map(value => new ResponseSeasonDto(value));
 
@@ -309,17 +281,12 @@ export class VideoService {
     return videoWithRate;
   }
 
-  async exists(id: number): Promise<boolean> {
-    const video: Video = await this.videoRepository.findOne({ where: { id } });
-    return video !== null;
-  }
-
   // seed fun
 
-  async createSeed(dto: CreateVideoCombineDto): Promise<ResponseVideoCombineDto> {
+  async createSeed(dto: CreateVideoCombineDto) {
     const videoDto: CreateVideoDto = dto;
     if (dto.icon)
-      videoDto.icon = this.filesService.createFileSimple(TypeFile.PICTURES, dto.icon);
+      videoDto.icon = await this.filesService.createFileSeed(TypeFile.PICTURES, dto.icon);
 
     const entityVideo = this.videoRepository.create(videoDto);
     entityVideo.genre = await this.genreService.findBy({ id: In(videoDto.genreIds) });
@@ -342,8 +309,8 @@ export class VideoService {
 
     const videoInfoDto: CreateVideoInfoDto = dto;
     videoInfoDto.videoId = video.id;
-    const videoInfoRes: ResponseVideoInfoDto = await this.videoInfoService.createSeed(videoInfoDto);
-    return new ResponseVideoCombineDto(reloadVideo, videoInfoRes);
+    const videoInfo = await this.videoInfoService.createSeed(videoInfoDto);
+    return { video: reloadVideo, videoInfo } as ResponseVideo; //new ResponseVideoCombineDto(reloadVideo, videoInfoRes);
   }
 
 }

@@ -1,13 +1,14 @@
-import {IsNumber, IsString} from "class-validator";
+import { IsNumber, IsString } from "class-validator";
+import { ListViewState } from "@models/user-list-view/list-view-state";
 
 export class CreateUserListViewDto {
 
-    @IsNumber()
-    userId: number;
+  @IsNumber()
+  userId: number;
 
-    @IsNumber()
-    listViewStateId: number;
+  @IsNumber()
+  listViewState: ListViewState;
 
-    @IsString()
-    name: string;
+  @IsString()
+  name: string;
 }

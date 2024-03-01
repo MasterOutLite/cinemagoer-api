@@ -23,7 +23,7 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  async registration(dto: CreateUserDto) {
+  async registration(dto: CreateUserDto, useRole: boolean) {
     const exists = await this.usersService.getByEmail(dto.email);
     if (exists)
       throw new ExistsException(`User already registration by email: ${dto.email}.`);
@@ -31,7 +31,7 @@ export class AuthService {
     console.log("Start registration in auth service!");
 
     const hashPassword = await bcrypt.hash(dto.password, 5);
-    const user: UserDto = await this.usersService.registration({ ...dto, password: hashPassword });
+    const user: UserDto = await this.usersService.registration({ ...dto, password: hashPassword }, useRole);
     return this.generateToken(user);
   }
 
@@ -50,16 +50,5 @@ export class AuthService {
       return new UserDto(user);
     }
     throw new UnauthorizedException("Bad email or password.");
-  }
-
-  //seed
-
-  async registrationSeed(dto: CreateUserDto) {
-    const exists = await this.usersService.getByEmail(dto.email);
-    if (exists)
-      throw new ExistsException(`User already registration with email: ${dto.email}.`);
-
-    const hashPassword = await bcrypt.hash(dto.password, 5);
-    return await this.usersService.registration({ ...dto, password: hashPassword });
   }
 }

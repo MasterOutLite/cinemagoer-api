@@ -1,7 +1,7 @@
 import {IsArray, IsDate, IsNumberString, IsOptional} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 import {Transform} from "class-transformer";
-import {SeasonOfYear} from "@models/video/season-of-year";
+import {SeasonOfYear} from "@models/video/enum/season-of-year";
 
 export class UpdateVideoDto {
     @ApiProperty({example: '1', description: 'Id video.'})
