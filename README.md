@@ -50,7 +50,7 @@ $ yarn start
 $ yarn dev
 
 # production mode
-$ yarn run start:prod
+$ yarn run start
 ```
 
 ## Test

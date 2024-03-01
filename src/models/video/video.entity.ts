@@ -1,7 +1,4 @@
-import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import Type from "@models/type/type.entity";
-import Status from "@models/status/status.entity";
-import VideoCategory from "@models/video-category/video-category.entity";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Publisher from "@models/publisher/publisher.entity";
 import AgeRating from "@models/age-rating/age-rating.entity";
 import ListView from "@models/list-view/list-view.entity";
@@ -12,75 +9,72 @@ import VideoSeries from "@models/video-series/video-series.entity";
 import Season from "@models/season/season.entity";
 import Genre from "@models/genre/genre.entity";
 import Group from "@models/group/group.entity";
+import { VideoCategory } from "@models/video/video-category";
+import { VideoStatus } from "@models/video/video-status";
+import { VideoType } from "@models/video/video-type";
 
 
-@Entity({name: 'videos',})
+@Entity({ name: "videos" })
 class Video {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({type: 'simple-array'})
-    name: string[];
+  @Column({ type: "simple-array" })
+  name: string[];
 
-    @Column()
-    dateRelease: Date;
+  @Column()
+  dateRelease: Date;
 
-    @Column({nullable: true})
-    icon: string;
+  @Column({ nullable: true })
+  icon: string;
 
-    @ManyToOne(() => Type, type => type.video)
-    type: Type
-    @Column()
-    typeId: number;
+  @Column()
+  type: VideoType;
 
-    @ManyToOne(() => Status, status => status.video)
-    status: Status
-    @Column()
-    statusId: number;
+  @Column()
+  status: VideoStatus;
 
-    @ManyToOne(() => VideoCategory, category => category.video)
-    videoCategory: VideoCategory
-    @Column()
-    videoCategoryId: number;
+  @Column()
+  videoCategory: VideoCategory;
 
-    @ManyToOne(() => Publisher, publisher => publisher.video)
-    publisher: Publisher
-    @Column()
-    publisherId: number;
+  @ManyToOne(() => Publisher, publisher => publisher.video)
+  publisher: Publisher;
+  @Column()
+  publisherId: number;
 
-    @ManyToOne(() => AgeRating, age => age.video)
-    ageRating: AgeRating
-    @Column()
-    ageRatingId: number;
+  @ManyToOne(() => AgeRating, age => age.video)
+  ageRating: AgeRating;
+  @Column()
+  ageRatingId: number;
 
-    @Column()
-    seasonOfYear: number;
+  @Column()
+  seasonOfYear: number;
 
-    @OneToMany(() => ListView, view => view.video)
-    listView: ListView[];
+  @OneToMany(() => ListView, view => view.video)
+  listView: ListView[];
 
-    @OneToMany(() => VideoRate, rate => rate.video)
-    videoRate: VideoRate[];
+  @OneToMany(() => VideoRate, rate => rate.video)
+  videoRate: VideoRate[];
 
-    @OneToMany(() => Comments, comments => comments.video)
-    comments: Comments[];
+  @OneToMany(() => Comments, comments => comments.video)
+  comments: Comments[];
 
-    @OneToMany(() => VideoInfo, videoInfo => videoInfo.video)
-    videoInfo: VideoInfo[];
+  @OneToMany(() => VideoInfo, videoInfo => videoInfo.video)
+  videoInfo: VideoInfo[];
 
-    @OneToMany(() => VideoSeries, series => series.video)
-    videoSeries: VideoSeries[];
+  @OneToMany(() => VideoSeries, series => series.video)
+  videoSeries: VideoSeries[];
 
-    @OneToMany(() => Season, season => season.video)
-    season: Season[];
+  @OneToMany(() => Season, season => season.video)
+  season: Season[];
 
-    @ManyToMany(() => Genre, genre => genre.video)
-    @JoinTable({name: 'video-genre'})
-    genre: Genre[];
+  @ManyToMany(() => Genre, genre => genre.video)
+  @JoinTable({ name: "video-genre" })
+  genre: Genre[];
 
-    @ManyToMany(() => Group, group => group.videos)
-    @JoinTable({name: 'group-video'})
-    group: Group[];
+  @ManyToMany(() => Group, group => group.videos)
+  @JoinTable({ name: "group-video" })
+  group: Group[];
 }
 
 

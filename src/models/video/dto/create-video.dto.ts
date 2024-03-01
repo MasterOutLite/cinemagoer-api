@@ -24,7 +24,6 @@ export class CreateVideoDto {
     @Transform(({value}) => (Array.isArray(value) ? value : value.split(',')))
     genreIds: number[];
 
-
     @ApiProperty({example: '1', description: 'Type video (Film, Serial, ...).'})
     @IsNumberString({}, {message: 'Is not number'})
     typeId: number;
@@ -39,7 +38,7 @@ export class CreateVideoDto {
 
     @ApiProperty({example: '1', description: 'Video category (Film, Cartoon, ...).'})
     @IsNumberString({}, {message: 'Is not number'})
-    videoCategoryId: number;
+    videoCategory: number;
 
     @ApiProperty({example: '1', description: 'Publisher name (The Walt Disney Company, Pixar, ...).'})
     @IsNumberString({}, {message: 'Is not number'})

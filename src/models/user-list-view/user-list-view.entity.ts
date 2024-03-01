@@ -1,28 +1,26 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import ListViewState from "@models/list-view-state/list-view-state.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import User from "@models/users/users.entity";
 import ListView from "@models/list-view/list-view.entity";
+import { ListViewState } from "@models/user-list-view/list-view-state";
 
-@Entity({name: 'user-list-view'})
+@Entity({ name: "user-list-view" })
 class UserListView {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @ManyToOne(() => ListViewState, list => list.userListView)
-    listViewState: ListViewState;
-    @Column()
-    listViewStateId: number;
+  @Column()
+  listViewState: ListViewState;
 
-    @ManyToOne(() => User, user => user.userListView)
-    user: User;
-    @Column()
-    userId: number;
+  @ManyToOne(() => User, user => user.userListView)
+  user: User;
+  @Column()
+  userId: number;
 
-    @OneToMany(() => ListView, list => list.userListView)
-    listView: ListView[];
+  @OneToMany(() => ListView, list => list.userListView)
+  listView: ListView[];
 }
 
 

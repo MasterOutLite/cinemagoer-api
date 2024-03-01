@@ -1,8 +1,6 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Video from "@models/video/video.entity";
 import Season from "@models/season/season.entity";
-import DubbingOfVideo from "@models/dubbing-of-video/dubbing-of-video.entity";
-import {DayOfWeek} from "@models/video-series/day-of-week";
 
 @Entity({name: 'video-series'})
 class VideoSeries {
@@ -34,8 +32,6 @@ class VideoSeries {
     @Column({nullable: true})
     dayOfWeek: number;
 
-    @OneToMany(() => DubbingOfVideo, dubbing => dubbing.videoSeries)
-    dubbingOfVideo: DubbingOfVideo[];
 }
 
 export default VideoSeries;
