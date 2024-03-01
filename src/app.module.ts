@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
 import { CommandSeed } from "@src/command-seed";
@@ -38,6 +37,7 @@ import VideoRate from "@models/video-rate/video-rate.entity";
 import AgeRating from "@models/age-rating/age-rating.entity";
 import Genre from "@models/genre/genre.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { ConfigModule } from "@nestjs/config";
 
 
 @Module({
