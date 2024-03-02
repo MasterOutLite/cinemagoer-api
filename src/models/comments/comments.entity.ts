@@ -21,6 +21,9 @@ class Comments {
     @Column()
     comment: string;
 
+    @Column({nullable: true})
+    createdAt: Date;
+
     @ManyToOne(() => Comments, comments => comments.commentsSelf)
     comments: Comments;
     @Column({nullable: true})
@@ -36,7 +39,6 @@ class Comments {
 
     @OneToMany(() => Comments, comments => comments.comments)
     commentsSelf: Comments[];
-    createdAt: string;
 }
 
 export default Comments;

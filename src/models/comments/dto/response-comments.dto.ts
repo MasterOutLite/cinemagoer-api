@@ -8,7 +8,7 @@ export class ResponseCommentsDto {
         this.id = dto.id
         this.userId = dto.userId;
         this.videoId = dto.videoId;
-        this.comments = dto.comment;
+        this.comment = dto.comment;
         this.commentId = dto?.commentsId;
         this.userAnswerId = dto?.userAnswerId;
         this.user = dto.user;
@@ -25,7 +25,7 @@ export class ResponseCommentsDto {
     readonly id: number;
 
     @ApiProperty({example: '2023-06-03', description: 'Create at'})
-    readonly createdAt: string;
+    readonly createdAt: Date;
 
     @ApiProperty({example: 1, description: 'ID user'})
     readonly userId: number;
@@ -37,7 +37,7 @@ export class ResponseCommentsDto {
     readonly videoId: number;
 
     @ApiProperty({example: "I liked the video!!!", description: 'ID video'})
-    readonly comments: string;
+    readonly comment: string;
 
     @ApiProperty({example: 1, description: 'ID comment main'})
     readonly commentId?: number;

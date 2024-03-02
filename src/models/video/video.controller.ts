@@ -109,7 +109,7 @@ export class VideoController {
                     trailers: Express.Multer.File[],
                     pictures: Express.Multer.File[]
                   }) {
-    return this.videoInfoService.update(dto, files.trailers, files.pictures);
+    return this.videoInfoService.updateInfo(dto.id,dto, files);
   }
 
   @ApiOperation({ summary: "Get video" })

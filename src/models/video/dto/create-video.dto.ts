@@ -32,7 +32,11 @@ export class CreateVideoDto {
   @IsEnum(VideoType)
   type: VideoType;
 
-  @ApiProperty({ enum: SeasonOfYear, enumName: "SeasonOfYear", description: "Season of year (Winter, Spring, Summer, Autumn)." })
+  @ApiProperty({
+    enum: SeasonOfYear,
+    enumName: "SeasonOfYear",
+    description: "Season of year (Winter, Spring, Summer, Autumn)."
+  })
   @IsEnum(SeasonOfYear)
   seasonOfYear: SeasonOfYear;
 
@@ -41,7 +45,7 @@ export class CreateVideoDto {
   status: VideoStatus;
 
   @ApiProperty({
-    enum: VideoCategory, type: "enumName", enumName: "VideoCategory",
+    enum: VideoCategory,
     description: "Video category (Film, Cartoon, ...)."
   })
   @IsEnum(VideoCategory)

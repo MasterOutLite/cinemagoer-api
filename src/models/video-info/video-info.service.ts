@@ -7,6 +7,12 @@ import { Repository } from "typeorm";
 import { CreateVideoInfoDto } from "@models/video-info/dto/create-video-info.dto";
 import { UpdateVideoInfoDto } from "@models/video-info/dto/update-video-info.dto";
 
+export type VideoInfoFiles = {
+  trailers: Express.Multer.File[];
+  pictures: Express.Multer.File[];
+}
+
+
 @Injectable()
 export class VideoInfoService {
   constructor(
@@ -16,75 +22,30 @@ export class VideoInfoService {
   ) {
   }
 
-  async create(dto: CreateVideoInfoDto, trailers: Express.Multer.File[], pictures: Express.Multer.File[]) {
-    const exists: VideoInfo = await this.videoInfoRepository.findOne({ where: { videoId: dto.videoId } });
-    if (exists)
-      throw new ExistsException();
+  async createInfo(videoId: number, dto: CreateVideoInfoDto, files: VideoInfoFiles): Promise<VideoInfo> {
 
-    dto.trailers = [];
-    if (trailers) {
-      for (const trailer of trailers) {
-        const name: string = await this.fileService.createFile(TypeFile.TRAILER, trailer);
-        dto.trailers.push(name);
-      }
-    }
-
-    dto.pictures = [];
-    if (pictures) {
-      for (const picture of pictures) {
-        const name: string = await this.fileService.createFile(TypeFile.PICTURES, picture);
-        dto.pictures.push(name);
-      }
-    }
-
+    const { trailers, pictures } = await this.saveFile(files.trailers, files.pictures);
+    dto.trailers = trailers;
+    dto.pictures = pictures;
     return await this.videoInfoRepository.save(dto);
   }
 
-  async update(dto: UpdateVideoInfoDto, trailers: Express.Multer.File[], pictures: Express.Multer.File[]) {
+  async updateInfo(videoId: number, dto: UpdateVideoInfoDto, files: VideoInfoFiles): Promise<VideoInfo> {
     const videoInfo = await this.videoInfoRepository.findOne({ where: { id: dto.id } });
-    if (!videoInfo)
-      throw new BadRequestException("Not found VideoInfo!");
+    const { trailers, pictures } = await this.saveFile(files.trailers, files.pictures);
 
-    const trailersAdd = [];
-    if (trailers) {
-      for (const trailer of trailers) {
-        const name: string = await this.fileService.createFile(TypeFile.TRAILER, trailer);
-        trailersAdd.push(name);
-      }
-    }
-
-    const picturesAdd = [];
-    if (pictures) {
-      for (const picture of pictures) {
-        const name: string = await this.fileService.createFile(TypeFile.PICTURES, picture);
-        picturesAdd.push(name);
-      }
-    }
-
-    if (dto.mainCharacters && dto.mainCharacters.length > 0)
+    if (dto.mainCharacters)
       videoInfo.mainCharacters = [...videoInfo.mainCharacters, ...dto.mainCharacters];
-    if (trailers && trailers.length > 0)
-      videoInfo.trailers = [...videoInfo.trailers, ...trailersAdd];
-    if (pictures && pictures.length > 0)
-      videoInfo.pictures = [...videoInfo.pictures, ...picturesAdd];
-
-    delete dto.pictures;
-    delete dto.trailers;
-    delete dto.mainCharacters;
+    if (trailers)
+      videoInfo.trailers = [...videoInfo.trailers, ...trailers];
+    if (pictures)
+      videoInfo.pictures = [...videoInfo.pictures, ...pictures];
 
     await this.videoInfoRepository.update(videoInfo.id, videoInfo);
     return videoInfo;
   }
 
-  async get(videoId: number) {
-    if (!videoId)
-      throw new BadRequestException(`Enter number is null or zero: videoId`);
-
-    return await this.videoInfoRepository.findOne({ where: { videoId } });
-  }
-
   // seed
-
   async createSeed(dto: CreateVideoInfoDto) {
     const exists: VideoInfo = await this.videoInfoRepository.findOne({ where: { videoId: dto.videoId } });
     if (exists)
@@ -93,7 +54,7 @@ export class VideoInfoService {
     const nameTrailers = [];
     if (dto.trailers && dto.trailers.length > 0) {
       for (const trailer of dto.trailers) {
-        const name: string =  await this.fileService.createFileSeed(TypeFile.TRAILER, trailer);
+        const name: string = await this.fileService.createFileSeed(TypeFile.TRAILER, trailer);
         nameTrailers.push(name);
       }
       dto.trailers = nameTrailers;
@@ -109,5 +70,26 @@ export class VideoInfoService {
     }
 
     return await this.videoInfoRepository.save(dto);
+  }
+
+  async saveFile(trailers: Express.Multer.File[],
+                 pictures: Express.Multer.File[]) {
+    const newTrailers: string[] = [];
+    if (trailers) {
+      for (const trailer of trailers) {
+        const name: string = await this.fileService.createFile(TypeFile.TRAILER, trailer);
+        newTrailers.push(name);
+      }
+    }
+
+    const newPictures: string[] = [];
+    if (pictures) {
+      for (const picture of pictures) {
+        const name: string = await this.fileService.createFile(TypeFile.PICTURES, picture);
+        newPictures.push(name);
+      }
+    }
+
+    return { trailers: newTrailers, pictures: newPictures };
   }
 }

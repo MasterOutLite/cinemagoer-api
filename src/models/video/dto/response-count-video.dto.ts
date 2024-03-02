@@ -10,53 +10,13 @@ export class ResponseCountVideoDto {
   }
 
   @ApiProperty({ example: 1, description: "Count" })
-  readonly count: number;
+  count: number;
 
   @ApiProperty({ example: 1, description: "Page" })
-  readonly page: number;
+  page: number;
 
   @ApiProperty({
-    example: [{
-      video: {
-        id: 1,
-        name: [
-          "Wolf",
-          "Вовк"
-        ],
-        dateRelease: "20.09.2023",
-        genre: [
-          {
-            "id": 1,
-            "name": "Roman"
-          },
-          {
-            "id": 1,
-            "name": "Fight"
-          }
-        ],
-        type: {
-          "id": 1,
-          "name": "Film"
-        },
-        status: {
-          "id": 1,
-          "name": "Release"
-        },
-        videoCategory: {
-          "id": 1,
-          "name": "Cartoon"
-        },
-        publisher: {
-          "id": 1,
-          "name": "Sony"
-        },
-        ageRating: {
-          "id": 1,
-          "name": "PG-13"
-        },
-        icon: "pictures/bfb73574-64dc-4fb6-97a7-9dfe9ac4aa5f.jpg4"
-      }
-    }], description: "Count"
+    type: [Video], description: "Video arr"
   })
   readonly rows: Video[];
 

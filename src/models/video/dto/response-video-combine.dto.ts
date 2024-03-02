@@ -5,10 +5,12 @@ import { CreateVideoSeriesDto } from "@models/video-series/dto/create-video-seri
 import { CreateSeasonDto } from "@models/season/dto/create-season.dto";
 import VideoInfo from "@models/video-info/video-info.entity";
 import Video from "@models/video/video.entity";
+import VideoSeries from "@models/video-series/video-series.entity";
+import Season from "@models/season/season.entity";
 
 export class ResponseVideoCombineDto {
   constructor(video: Video, videoInfo: VideoInfo,
-              series?: ResponseVideoSeriesDto[], season?: ResponseSeasonDto[]) {
+              series?: VideoSeries[], season?: Season[]) {
     this.video = video;
     this.videoInfo = videoInfo;
     this.series = series;
@@ -22,8 +24,8 @@ export class ResponseVideoCombineDto {
   videoInfo: VideoInfo;
 
   @ApiProperty({ type: [CreateVideoSeriesDto], description: "Response video series", required: false })
-  series?: ResponseVideoSeriesDto[];
+  series?: VideoSeries[];
 
   @ApiProperty({ type: [CreateSeasonDto], description: "Response video Season", required: false })
-  season?: ResponseSeasonDto[];
+  season?: Season[];
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import Video from "@models/video/video.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Between, ILike, In, Repository } from "typeorm";
@@ -18,8 +18,6 @@ import { FilterVideoQuery } from "@models/video/query/filter-video.query";
 import { ResponseCountVideoDto } from "@models/video/dto/response-count-video.dto";
 import { SearchVideoQuery } from "@models/video/query/search-video.query";
 import { GetVideoQuery } from "@models/video/query/get-video.query";
-import { ResponseVideoSeriesDto } from "@models/video-series/dto/response-video-series.dto";
-import { ResponseSeasonDto } from "@models/season/dto/response-season.dto";
 import VideoRate from "@models/video-rate/video-rate.entity";
 import { ResponseVideo } from "@models/video/dto/response-video";
 
@@ -52,12 +50,7 @@ export class VideoService {
     }[] = [];
     existsAtr.push({
       tag: "genreIds",
-      exists: await this.genreService.exists({
-        where:
-          {
-            id: In(videoDto.genreIds)
-          }
-      })
+      exists: !!videoDto.genreIds
     });
     existsAtr.push({
       tag: "publisherId",
@@ -97,47 +90,44 @@ export class VideoService {
 
     const video: Video = await this.videoRepository.save(entityVideo);
 
-    const reloadVideo = await this.videoRepository.findOne({
-      where: {
-        id: video.id
-      },
-      relations: {
+    const videoInfoDto: CreateVideoInfoDto = dto;
+    videoInfoDto.videoId = video.id;
+    const videoInfo = await this.videoInfoService.createInfo(video.id, videoInfoDto, files);
+
+    return { video, videoInfo } as ResponseVideo;
+  }
+
+  async update(dto: UpdateVideoDto, files) {
+    const video = await this.videoRepository.findOne({
+      where: { id: dto.id }, relations: {
         genre: true,
         ageRating: true,
         publisher: true
       }
     });
-
-    const videoInfoDto: CreateVideoInfoDto = dto;
-    videoInfoDto.videoId = video.id;
-    const videoInfo = await this.videoInfoService.create(videoInfoDto, files.trailers, files.pictures);
-
-    return { video: reloadVideo, videoInfo } as ResponseVideo; //new ResponseVideoCombineDto(reloadVideo, videoInfoRes);
-  }
-
-  async update(dto: UpdateVideoDto, files) {
-    const video = await this.videoRepository.findOne({ where: { id: dto.id } });
     if (!video)
-      throw new BadRequestException("Video id is bad!");
+      throw new NotFoundException("Not found video!");
 
     const existsAtr: {
       tag: string,
       exists: boolean
     }[] = [];
-    if (dto.genreIds)
-      existsAtr.push({ tag: "genreIds", exists: await this.genreService.exists({ where: { id: In(dto.genreIds) } }) });
-    if (dto.publisherId)
-      existsAtr.push({
-        tag: "publisherId",
-        exists: await this.publisherService.exists({ where: { id: dto.publisherId } })
-      });
-    if (dto.ageRatingId)
-      existsAtr.push({
-        tag: "ageRatingId",
-        exists: await this.ageRatingService.exists({ where: { id: dto.ageRatingId } })
-      });
-    if (dto.groupId)
-      existsAtr.push({ tag: "groupId", exists: await this.groupService.exists({ where: { id: dto.groupId } }) });
+    existsAtr.push({
+      tag: "genreIds",
+      exists: dto.genreIds && await this.genreService.exists({ where: { id: In(dto.genreIds) } })
+    });
+    existsAtr.push({
+      tag: "publisherId",
+      exists: dto.publisherId && await this.publisherService.exists({ where: { id: dto.publisherId } })
+    });
+    existsAtr.push({
+      tag: "ageRatingId",
+      exists: dto.ageRatingId && await this.ageRatingService.exists({ where: { id: dto.ageRatingId } })
+    });
+    existsAtr.push({
+      tag: "groupId",
+      exists: dto.groupId && await this.groupService.exists({ where: { id: dto.groupId } })
+    });
 
     const wrongAtr = existsAtr.filter(value => !value.exists);
     if (wrongAtr.length > 0) {
@@ -147,7 +137,7 @@ export class VideoService {
     if (files.icon && files.icon[0]) {
       if (video.icon)
         this.filesService.removeFile(video.icon);
-      dto.icon = await this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
+      video.icon = await this.filesService.createFile(TypeFile.PICTURES, files.icon[0]);
     }
 
     if (dto.genreIds)
@@ -156,18 +146,15 @@ export class VideoService {
       video.group = await this.groupService.findBy({ id: dto.groupId });
     await this.videoRepository.update(video.id, video);
 
-    return await this.videoRepository.findOne({
-      where: { id: video.id }, relations: {
-        genre: true,
-        ageRating: true,
-        publisher: true
-      }
-    });
+    return video;
   }
 
   async getVideoByFilter(dto: FilterVideoQuery, auth: TokenFormat) {
     const search = {
       ...dto
+      // seasonOfYear: dto.seasonOfYear, type: dto.type,
+      // status: dto.status, videoCategory: dto.videoCategory,
+      // publisherId: dto.publisherId, ageRatingId: dto.ageRatingId
     };
     delete search.dateReleaseMax;
     delete search.dateReleaseMin;
@@ -258,11 +245,7 @@ export class VideoService {
       throw new BadRequestException("Video id is bad!");
 
     const resVideo = { ...video, rate: Math.round(rate * 10) / 10, yourRate };
-    const resInfo = video.videoInfo[0];
-    const resSeries = video.videoSeries.map(value => new ResponseVideoSeriesDto(value));
-    const resSeason = video.season.map(value => new ResponseSeasonDto(value));
-
-    return new ResponseVideoCombineDto(resVideo, resInfo, resSeries, resSeason);
+    return new ResponseVideoCombineDto(resVideo, video.videoInfo[0], video.videoSeries, video.season);
   }
 
   async addRateToVideo(videos: Video[], auth: TokenFormat) {

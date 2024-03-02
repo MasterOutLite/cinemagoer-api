@@ -45,7 +45,8 @@ export class CommentsService {
             throw new BadRequestException(`Request param ${wrongAtr.map(value => value.tag)} is null or bad value!`);
         }
 
-        return await this.commentsRepository.save({...dto, userId: auth.id});
+        return await this.commentsRepository.save({...dto, userId: auth.id, user: auth, createdAt: new Date(),
+             likeCount: 0, dislikeCount: 0, userLike:  'none'});
     }
 
     async getAll(dto: GetCommentsDto, auth: TokenFormat) {
@@ -72,6 +73,9 @@ export class CommentsService {
             },
             select: {
                 user: {id: true, nickname: true, avatar: true}
+            },
+            order:{
+                id: 'desc'
             }
         })
 
@@ -91,14 +95,14 @@ export class CommentsService {
                 }
             });
 
-            const userLike = await this.commentsRateRepository.count({
+            const userLike = await this.commentsRateRepository.findOne({
                 where: {
                     commentsId: comment.id,
                     userId: auth ? auth.id : 0
                 }
             });
 
-            newComments.push({...comment, likeCount, dislikeCount, userLike})
+            newComments.push({...comment, likeCount, dislikeCount, userLike: userLike ? userLike.rate : 'none'})
         }
 
         //console.log('Comments Service:', 'comments date', commentsCount);

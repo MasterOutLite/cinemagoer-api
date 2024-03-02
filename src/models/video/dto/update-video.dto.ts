@@ -69,4 +69,6 @@ export class UpdateVideoDto {
     @IsNumberString({}, {message: 'Is not number'})
     @IsOptional()
     groupId?: number;
+
+    //  Info
 }

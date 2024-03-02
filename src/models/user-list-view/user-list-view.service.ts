@@ -11,7 +11,6 @@ import { CheckExists } from "@src/exception/CheckExists";
 import { ResponseListViewDto } from "@models/user-list-view/dto/response-list-view.dto";
 import { StateAction } from "@models/user-list-view/dto/state-action";
 import { GetUserListViewQuery } from "@models/user-list-view/query/get-user-list-view.query";
-import { ResponseVideoFromListView } from "@models/user-list-view/dto/response-user-list-view.dto";
 
 @Injectable()
 export class UserListViewService {
@@ -55,11 +54,6 @@ export class UserListViewService {
       }
     });
 
-    console.log("userListViewId");
-    console.log(dto.userListViewId);
-    console.log();
-    console.log(existsWherever);
-
     if (!existsWherever) {
       //create
       const listView = await this.listViewRepository.save(dto);
@@ -83,25 +77,14 @@ export class UserListViewService {
   }
 
   async getAllWithVideo(query: GetUserListViewQuery) {
-    const userListView = await this.getAll(query);
-
-    for (const list of userListView) {
-      const listViews = await this.listViewRepository.find({
-        where: { userListViewId: list.id },
-        relations: {
+    return await this.userListViewRepository.find({
+      where: { userId: query.userId },
+      relations: {
+        listView: {
           video: true
         }
-      });
-
-      // @ts-ignore
-      list.video = [];
-      for (const video of listViews) {
-        // @ts-ignore
-        list.video.push(new ResponseVideoFromListView(video.video));
       }
-    }
-
-    return userListView;
+    });
   }
 
   async getListViewWhereVideo(videoId: number, userId: number) {
