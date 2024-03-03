@@ -75,7 +75,7 @@ export class CommentsService {
                 user: {id: true, nickname: true, avatar: true}
             },
             order:{
-                id: 'desc'
+                createdAt: 'asc'
             }
         })
 
