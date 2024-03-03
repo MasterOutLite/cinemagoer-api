@@ -6,7 +6,7 @@ import { ValidationException } from "@src/exception/ValidationException";
 
 async function bootstrap() {
   const PORT = process.env.PORT || 3000;
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   console.log("PORT:", PORT);
 
@@ -23,7 +23,10 @@ async function bootstrap() {
   }));
 
   app.setGlobalPrefix("api");
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    credentials: true
+  });
 
   const configSwagger = new DocumentBuilder()
     .setTitle("Cinemagoer")

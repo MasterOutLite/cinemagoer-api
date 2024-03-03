@@ -190,6 +190,7 @@ export class SeedService {
           commentsData.push({
             userId: user.id,
             videoId: entity.video.id,
+            createAt: new Date(),
             // For more count words in comment edit here
             comment: faker.word.words({ count: { min: 10, max: 30 } })
           });
