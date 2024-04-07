@@ -1,3 +1,4 @@
+import { DayOfWeek } from './../day-of-week';
 import {ApiProperty} from "@nestjs/swagger";
 import {IsBoolean, IsDate, IsNumberString, IsOptional, IsString} from "class-validator";
 
@@ -15,6 +16,11 @@ export class UpdateVideoSeriesDto {
     @IsNumberString({}, {message: 'Is not number.'})
     @IsOptional()
     series: number;
+    
+    @ApiProperty({ enum: DayOfWeek, description: "Day when be show series." })
+    @IsNumberString({}, { message: "Is not number." })
+    @IsOptional()
+    readonly dayOfWeek: DayOfWeek;
 
     @ApiProperty({example: 'Again hi!', description: 'Name series'})
     @IsString({message: 'Is not string.'})

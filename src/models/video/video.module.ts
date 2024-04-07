@@ -18,12 +18,13 @@ import Publisher from "@models/publisher/publisher.entity";
 import AgeRating from "@models/age-rating/age-rating.entity";
 import Group from "@models/group/group.entity";
 import VideoRate from "@models/video-rate/video-rate.entity";
+import VideoSeries from "@models/video-series/video-series.entity";
 
 @Module({
   controllers: [VideoController],
   providers: [VideoService],
   imports: [
-    TypeOrmModule.forFeature([Video, VideoRate,
+    TypeOrmModule.forFeature([Video, VideoSeries, VideoRate,
       Genre, Publisher, AgeRating, Group]),
     AuthModule,
     VideoRateModule,

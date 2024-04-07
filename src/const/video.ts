@@ -1,7 +1,6 @@
 import { Genre } from "@src/const/genre";
 import { AgeRating } from "@src/const/age-ratings";
 import { CreateVideoCombineDto } from "@models/video/dto/create-video-combine.dto";
-import { CreateSeasonDto } from "@models/season/dto/create-season.dto";
 import { DayOfWeek } from "@models/video-series/day-of-week";
 import { SeasonOfYear } from "@models/video/enum/season-of-year";
 import { VideoCategory } from "@models/video/enum/video-category";
@@ -32,92 +31,90 @@ export const anime: CreateVideoCombineDto[] = [
     duration: "~24 хв",
     countSeries: 12,
     mainCharacters: [],
-    series: {
-      series: [
-        {
-          series: 1,
-          name: "The Journey's End",
-          release: false,
-          dateRelease: new Date("2023-09-29"),
-          dayOfWeek: DayOfWeek.Friday
-        },
-        {
-          series: 2,
-          name: "It Didn't Have to Be Magic...",
-          release: false,
-          dateRelease: new Date("2023-09-29"),
-          dayOfWeek: DayOfWeek.Friday
-        },
-        {
-          series: 3,
-          name: "Killing Magic",
-          release: false,
-          dateRelease: new Date("2023-09-29"),
-          dayOfWeek: DayOfWeek.Friday
-        },
-        {
-          series: 4,
-          name: "The Land Where Souls Rest",
-          release: false,
-          dateRelease: new Date("2023-09-29"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 5,
-          name: "Phantoms of the Dead",
-          release: false,
-          dateRelease: new Date("2023-10-06"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 6,
-          name: "The Hero of the Village",
-          release: false,
-          dateRelease: new Date("2023-10-13"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 7,
-          name: "Like a Fairy Tale",
-          release: false,
-          dateRelease: new Date("2023-10-20"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 8,
-          name: "Frieren the Slayer",
-          release: false,
-          dateRelease: new Date("2023-10-27"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 9,
-          name: "Aura the Guillotine",
-          release: false,
-          dateRelease: new Date("2023-11-03"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 10,
-          name: "A Powerful Mage",
-          release: false,
-          dateRelease: new Date("2023-11-10"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 11,
-          name: "Winter in the Northern Lands",
-          release: false,
-          dateRelease: new Date("2023-11-17"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 12,
-          name: "A Real Hero",
-          release: false,
-          dateRelease: new Date("2023-11-24"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          series: 13,
-          name: "Episode 13",
-          release: false,
-          dateRelease: new Date("2023-12-01"),
-          dayOfWeek: DayOfWeek.Friday
-        }
-      ]
-    }
+    series: [
+      {
+        series: 1,
+        name: "The Journey's End",
+        release: false,
+        dateRelease: new Date("2023-09-29"),
+        dayOfWeek: DayOfWeek.Friday
+      },
+      {
+        series: 2,
+        name: "It Didn't Have to Be Magic...",
+        release: false,
+        dateRelease: new Date("2023-09-29"),
+        dayOfWeek: DayOfWeek.Friday
+      },
+      {
+        series: 3,
+        name: "Killing Magic",
+        release: false,
+        dateRelease: new Date("2023-09-29"),
+        dayOfWeek: DayOfWeek.Friday
+      },
+      {
+        series: 4,
+        name: "The Land Where Souls Rest",
+        release: false,
+        dateRelease: new Date("2023-09-29"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 5,
+        name: "Phantoms of the Dead",
+        release: false,
+        dateRelease: new Date("2023-10-06"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 6,
+        name: "The Hero of the Village",
+        release: false,
+        dateRelease: new Date("2023-10-13"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 7,
+        name: "Like a Fairy Tale",
+        release: false,
+        dateRelease: new Date("2023-10-20"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 8,
+        name: "Frieren the Slayer",
+        release: false,
+        dateRelease: new Date("2023-10-27"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 9,
+        name: "Aura the Guillotine",
+        release: false,
+        dateRelease: new Date("2023-11-03"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 10,
+        name: "A Powerful Mage",
+        release: false,
+        dateRelease: new Date("2023-11-10"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 11,
+        name: "Winter in the Northern Lands",
+        release: false,
+        dateRelease: new Date("2023-11-17"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 12,
+        name: "A Real Hero",
+        release: false,
+        dateRelease: new Date("2023-11-24"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        series: 13,
+        name: "Episode 13",
+        release: false,
+        dateRelease: new Date("2023-12-01"),
+        dayOfWeek: DayOfWeek.Friday
+      }
+    ]
   },
   {
     name: [
@@ -140,68 +137,66 @@ export const anime: CreateVideoCombineDto[] = [
     duration: "~24 хв",
     countSeries: 12,
     mainCharacters: [],
-    series: {
-      series: [
-        {
-          series: 1,
-          name: "The Kingdom of Science Strikes Back",
-          release: false,
-          dateRelease: new Date("2023-10-12"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 2,
-          name: "Episode 13",
-          release: false,
-          dateRelease: new Date("2023-10-19"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 3,
-          name: "Episode 14",
-          release: false,
-          dateRelease: new Date("2023-10-26"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 4,
-          name: "Episode 15",
-          release: false,
-          dateRelease: new Date("2023-11-02"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 5,
-          name: "Episode 16",
-          release: false,
-          dateRelease: new Date("2023-11-09"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 6,
-          name: "Episode 17",
-          release: false,
-          dateRelease: new Date("2023-11-16"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 7,
-          name: "Episode 18",
-          release: false,
-          dateRelease: new Date("2023-11-23"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 8,
-          name: "Episode 19",
-          release: false,
-          dateRelease: new Date("2023-11-30"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 9,
-          name: "Episode 20",
-          release: false,
-          dateRelease: new Date("2023-12-07"),
-          dayOfWeek: DayOfWeek.Thursday
-        }
-      ]
-    }
+    series: [
+      {
+        series: 1,
+        name: "The Kingdom of Science Strikes Back",
+        release: false,
+        dateRelease: new Date("2023-10-12"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 2,
+        name: "Episode 13",
+        release: false,
+        dateRelease: new Date("2023-10-19"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 3,
+        name: "Episode 14",
+        release: false,
+        dateRelease: new Date("2023-10-26"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 4,
+        name: "Episode 15",
+        release: false,
+        dateRelease: new Date("2023-11-02"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 5,
+        name: "Episode 16",
+        release: false,
+        dateRelease: new Date("2023-11-09"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 6,
+        name: "Episode 17",
+        release: false,
+        dateRelease: new Date("2023-11-16"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 7,
+        name: "Episode 18",
+        release: false,
+        dateRelease: new Date("2023-11-23"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 8,
+        name: "Episode 19",
+        release: false,
+        dateRelease: new Date("2023-11-30"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 9,
+        name: "Episode 20",
+        release: false,
+        dateRelease: new Date("2023-12-07"),
+        dayOfWeek: DayOfWeek.Thursday
+      }
+    ]
   },
   {
     name: [
@@ -224,134 +219,132 @@ export const anime: CreateVideoCombineDto[] = [
     duration: "~24 хв",
     countSeries: 12,
     mainCharacters: [],
-    series: {
-      series: [
-        {
-          series: 1,
-          name: "Hidden Inventory",
-          release: false,
-          dateRelease: new Date("2023-07-06"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 2,
-          name: "Hidden Inventory 2",
-          release: false,
-          dateRelease: new Date("2023-07-13"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 3,
-          name: "Hidden Inventory 3",
-          release: false,
-          dateRelease: new Date("2023-07-20"),
-          dayOfWeek: DayOfWeek.Thursday
-        },
-        {
-          series: 4,
-          name: "Hidden Inventory 3",
-          release: false,
-          dateRelease: new Date("2023-07-27"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 5,
-          name: "Premature Death",
-          release: false,
-          dateRelease: new Date("2023-08-03"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 6,
-          name: "That's How It Is",
-          release: false,
-          dateRelease: new Date("2023-08-31"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 7,
-          name: "Evening Festival",
-          release: false,
-          dateRelease: new Date("2023-09-07"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 8,
-          name: "Shibuya Incident",
-          release: false,
-          dateRelease: new Date("2023-09-14"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 9,
-          name: "Shibuya Incident - Gate, Open",
-          release: false,
-          dateRelease: new Date("2023-09-21"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 10,
-          name: "Pandemonium",
-          release: false,
-          dateRelease: new Date("2023-09-28"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 11,
-          name: "Seance",
-          release: false,
-          dateRelease: new Date("2023-10-05"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 12,
-          name: "Dull Knife",
-          release: false,
-          dateRelease: new Date("2023-10-12"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 13,
-          name: "Red Scale",
-          release: false,
-          dateRelease: new Date("2023-10-19"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 14,
-          name: "Fluctuations",
-          release: false,
-          dateRelease: new Date("2023-10-26"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 15,
-          name: "Fluctuations, Part 2",
-          release: false,
-          dateRelease: new Date("2023-11-02"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 16,
-          name: "Thunderclap",
-          release: false,
-          dateRelease: new Date("2023-11-09"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 17,
-          name: "Thunderclap, Part 2",
-          release: false,
-          dateRelease: new Date("2023-11-16"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 18,
-          name: "Right and Wrong",
-          release: false,
-          dateRelease: new Date("2023-11-23"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 19,
-          name: "Episode 19",
-          release: false,
-          dateRelease: new Date("2023-11-30"),
-          dayOfWeek: DayOfWeek.Thursday
-        }, {
-          series: 20,
-          name: "Episode 20",
-          release: false,
-          dateRelease: new Date("2023-12-07"),
-          dayOfWeek: DayOfWeek.Thursday
-        }
-      ]
-    }
+    series: [
+      {
+        series: 1,
+        name: "Hidden Inventory",
+        release: false,
+        dateRelease: new Date("2023-07-06"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 2,
+        name: "Hidden Inventory 2",
+        release: false,
+        dateRelease: new Date("2023-07-13"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 3,
+        name: "Hidden Inventory 3",
+        release: false,
+        dateRelease: new Date("2023-07-20"),
+        dayOfWeek: DayOfWeek.Thursday
+      },
+      {
+        series: 4,
+        name: "Hidden Inventory 3",
+        release: false,
+        dateRelease: new Date("2023-07-27"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 5,
+        name: "Premature Death",
+        release: false,
+        dateRelease: new Date("2023-08-03"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 6,
+        name: "That's How It Is",
+        release: false,
+        dateRelease: new Date("2023-08-31"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 7,
+        name: "Evening Festival",
+        release: false,
+        dateRelease: new Date("2023-09-07"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 8,
+        name: "Shibuya Incident",
+        release: false,
+        dateRelease: new Date("2023-09-14"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 9,
+        name: "Shibuya Incident - Gate, Open",
+        release: false,
+        dateRelease: new Date("2023-09-21"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 10,
+        name: "Pandemonium",
+        release: false,
+        dateRelease: new Date("2023-09-28"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 11,
+        name: "Seance",
+        release: false,
+        dateRelease: new Date("2023-10-05"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 12,
+        name: "Dull Knife",
+        release: false,
+        dateRelease: new Date("2023-10-12"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 13,
+        name: "Red Scale",
+        release: false,
+        dateRelease: new Date("2023-10-19"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 14,
+        name: "Fluctuations",
+        release: false,
+        dateRelease: new Date("2023-10-26"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 15,
+        name: "Fluctuations, Part 2",
+        release: false,
+        dateRelease: new Date("2023-11-02"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 16,
+        name: "Thunderclap",
+        release: false,
+        dateRelease: new Date("2023-11-09"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 17,
+        name: "Thunderclap, Part 2",
+        release: false,
+        dateRelease: new Date("2023-11-16"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 18,
+        name: "Right and Wrong",
+        release: false,
+        dateRelease: new Date("2023-11-23"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 19,
+        name: "Episode 19",
+        release: false,
+        dateRelease: new Date("2023-11-30"),
+        dayOfWeek: DayOfWeek.Thursday
+      }, {
+        series: 20,
+        name: "Episode 20",
+        release: false,
+        dateRelease: new Date("2023-12-07"),
+        dayOfWeek: DayOfWeek.Thursday
+      }
+    ]
   },
   {
     name: [
@@ -373,74 +366,72 @@ export const anime: CreateVideoCombineDto[] = [
     icon: "7239b141b697f45559bce35346568e.jpg",
     duration: "~24 хв",
     mainCharacters: [],
-    series: {
-      series: [
-        {
-          series: 1,
-          name: "The Case of the Metropolitan Serial Drownings",
-          release: false,
-          dateRelease: new Date("2023-10-02"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 2,
-          name: "The Case of the Locked-Room Piggy Bank Theft",
-          release: false,
-          dateRelease: new Date("2023-10-09"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 3,
-          name: "The Case of the Benizome Hot Spring Murder (Part 1)",
-          release: false,
-          dateRelease: new Date("2023-10-16"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 4,
-          name: "The Case of the Benizome Hot Spring Murder (Part 2)",
-          release: false,
-          dateRelease: new Date("2023-10-23"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 5,
-          name: "The Case of the Hand Collector",
-          release: false,
-          dateRelease: new Date("2023-10-30"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 6,
-          name: "The Case of the Live Broadcast Murder",
-          release: false,
-          dateRelease: new Date("2023-11-6"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 7,
-          name: "The Case of the Observatory Murder (Part 1)",
-          release: false,
-          dateRelease: new Date("2023-11-13"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 8,
-          name: "The Case of the Observatory Murder (Part 2)",
-          release: false,
-          dateRelease: new Date("2023-11-20"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 9,
-          name: "Episode 9",
-          release: false,
-          dateRelease: new Date("2023-11-27"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 10,
-          name: "Episode 10",
-          release: false,
-          dateRelease: new Date("2023-12-4"),
-          dayOfWeek: DayOfWeek.Monday
-        }
-      ]
-    }
+    series: [
+      {
+        series: 1,
+        name: "The Case of the Metropolitan Serial Drownings",
+        release: false,
+        dateRelease: new Date("2023-10-02"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 2,
+        name: "The Case of the Locked-Room Piggy Bank Theft",
+        release: false,
+        dateRelease: new Date("2023-10-09"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 3,
+        name: "The Case of the Benizome Hot Spring Murder (Part 1)",
+        release: false,
+        dateRelease: new Date("2023-10-16"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 4,
+        name: "The Case of the Benizome Hot Spring Murder (Part 2)",
+        release: false,
+        dateRelease: new Date("2023-10-23"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 5,
+        name: "The Case of the Hand Collector",
+        release: false,
+        dateRelease: new Date("2023-10-30"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 6,
+        name: "The Case of the Live Broadcast Murder",
+        release: false,
+        dateRelease: new Date("2023-11-6"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 7,
+        name: "The Case of the Observatory Murder (Part 1)",
+        release: false,
+        dateRelease: new Date("2023-11-13"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 8,
+        name: "The Case of the Observatory Murder (Part 2)",
+        release: false,
+        dateRelease: new Date("2023-11-20"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 9,
+        name: "Episode 9",
+        release: false,
+        dateRelease: new Date("2023-11-27"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 10,
+        name: "Episode 10",
+        release: false,
+        dateRelease: new Date("2023-12-4"),
+        dayOfWeek: DayOfWeek.Monday
+      }
+    ]
   },
   {
     name: [
@@ -462,74 +453,73 @@ export const anime: CreateVideoCombineDto[] = [
     icon: "1696582899_poster.jpg",
     duration: "~24 хв",
     mainCharacters: [],
-    series: {
-      series: [
-        {
-          series: 1,
-          name: "Migi and Dali",
-          release: false,
-          dateRelease: new Date("2023-10-02"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 2,
-          name: "Welcome Party",
-          release: false,
-          dateRelease: new Date("2023-10-09"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 3,
-          name: "Let's Make Friends",
-          release: false,
-          dateRelease: new Date("2023-10-16"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          series: 4,
-          name: "Let's be Good Kids",
-          release: false,
-          dateRelease: new Date("2023-10-23"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 5,
-          name: "Water Flea's Song",
-          release: false,
-          dateRelease: new Date("2023-10-30"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 6,
-          name: "Who Killed the Parent Bird?",
-          release: false,
-          dateRelease: new Date("2023-11-6"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 7,
-          name: "It Wasn't a Ghost",
-          release: false,
-          dateRelease: new Date("2023-11-13"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 8,
-          name: "Two ≠ One",
-          release: false,
-          dateRelease: new Date("2023-11-20"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 9,
-          name: "Episode 9",
-          release: false,
-          dateRelease: new Date("2023-11-27"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          series: 10,
-          name: "Episode 10",
-          release: false,
-          dateRelease: new Date("2023-12-4"),
-          dayOfWeek: DayOfWeek.Monday
-        }
-      ]
-    }
+    series: [
+      {
+        series: 1,
+        name: "Migi and Dali",
+        release: false,
+        dateRelease: new Date("2023-10-02"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 2,
+        name: "Welcome Party",
+        release: false,
+        dateRelease: new Date("2023-10-09"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 3,
+        name: "Let's Make Friends",
+        release: false,
+        dateRelease: new Date("2023-10-16"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        series: 4,
+        name: "Let's be Good Kids",
+        release: false,
+        dateRelease: new Date("2023-10-23"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 5,
+        name: "Water Flea's Song",
+        release: false,
+        dateRelease: new Date("2023-10-30"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 6,
+        name: "Who Killed the Parent Bird?",
+        release: false,
+        dateRelease: new Date("2023-11-6"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 7,
+        name: "It Wasn't a Ghost",
+        release: false,
+        dateRelease: new Date("2023-11-13"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 8,
+        name: "Two ≠ One",
+        release: false,
+        dateRelease: new Date("2023-11-20"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 9,
+        name: "Episode 9",
+        release: false,
+        dateRelease: new Date("2023-11-27"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        series: 10,
+        name: "Episode 10",
+        release: false,
+        dateRelease: new Date("2023-12-4"),
+        dayOfWeek: DayOfWeek.Monday
+      }
+    ]
+
   }
 ];
 
@@ -698,61 +688,54 @@ export const serials: CreateVideoCombineDto[] = [
     ],
     icon: "1691517303_33.jpg",
     duration: "~20 хв",
-    series: {
-      season: {
-        name: "1",
-        videoId: 0,
-        number: 1
-      } as CreateSeasonDto,
-      series: [
-        {
-          name: "2 Weeks",
-          series: 1,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          name: "13 Days",
-          series: 2,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          name: "12 Days",
-          series: 3,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        },
-        {
-          name: "6 Days",
-          series: 4,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          name: "3 Days",
-          series: 5,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          name: "1 Days",
-          series: 6,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        }, {
-          name: "1 Hour",
-          series: 7,
-          release: false,
-          dateRelease: new Date("2023"),
-          dayOfWeek: DayOfWeek.Monday
-        }
-      ]
-    },
+    series: [
+      {
+        name: "2 Weeks",
+        series: 1,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        name: "13 Days",
+        series: 2,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        name: "12 Days",
+        series: 3,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      },
+      {
+        name: "6 Days",
+        series: 4,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        name: "3 Days",
+        series: 5,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        name: "1 Days",
+        series: 6,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      }, {
+        name: "1 Hour",
+        series: 7,
+        release: false,
+        dateRelease: new Date("2023"),
+        dayOfWeek: DayOfWeek.Monday
+      }
+    ],
     mainCharacters: [
       "Стів Бушемі",
       "Деніел Редкліфф",
@@ -795,13 +778,9 @@ export const serials: CreateVideoCombineDto[] = [
       "Lucian Zanes",
       "Kareem Savinon"
     ],
-    series: {
-      season: {
-        name: "Сезон 1",
-        videoId: 0,
-        number: 1
-      } as CreateSeasonDto,
-      series: [
+    series:
+
+      [
         {
           name: "Something Different",
           series: 1,
@@ -830,20 +809,20 @@ export const serials: CreateVideoCombineDto[] = [
           dateRelease: new Date("2023-07-21"),
           dayOfWeek: DayOfWeek.Friday
         }, {
-          name: "Loyalty",
-          series: 5,
-          release: false,
-          dateRelease: new Date("2023-07-28"),
-          dayOfWeek: DayOfWeek.Friday
-        }, {
-          name: "Essequibo",
-          series: 6,
-          release: false,
-          dateRelease: new Date("2023-07-28"),
-          dayOfWeek: DayOfWeek.Friday
-        }
+        name: "Loyalty",
+        series: 5,
+        release: false,
+        dateRelease: new Date("2023-07-28"),
+        dayOfWeek: DayOfWeek.Friday
+      }, {
+        name: "Essequibo",
+        series: 6,
+        release: false,
+        dateRelease: new Date("2023-07-28"),
+        dayOfWeek: DayOfWeek.Friday
+      }
       ]
-    }
+
   }
 ];
 

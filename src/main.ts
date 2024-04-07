@@ -5,7 +5,7 @@ import { ValidationPipe } from "@nestjs/common";
 import { ValidationException } from "@src/exception/ValidationException";
 
 async function bootstrap() {
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create(AppModule, { cors: true });
 
   console.log("PORT:", PORT);

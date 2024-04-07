@@ -163,7 +163,7 @@ export class SeedService {
         const entity = await this.videoService.createSeed(video);
         //create series when its exists
         if (video.series) {
-          await this.videoSeriesService.create({ videoId: entity.video.id, series: video.series.series });
+          await this.videoSeriesService.create({ videoId: entity.video.id, series: video.series });
         }
 
         // Create video rate

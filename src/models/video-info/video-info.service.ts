@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { FilesService, TypeFile } from "@src/files/files.service";
 import { ExistsException } from "@src/exception/ExistsException";
 import VideoInfo from "@models/video-info/video-info.entity";
@@ -8,7 +8,7 @@ import { CreateVideoInfoDto } from "@models/video-info/dto/create-video-info.dto
 import { UpdateVideoInfoDto } from "@models/video-info/dto/update-video-info.dto";
 
 export type VideoInfoFiles = {
-  trailers: Express.Multer.File[];
+  // trailers: Express.Multer.File[];
   pictures: Express.Multer.File[];
 }
 
@@ -23,21 +23,18 @@ export class VideoInfoService {
   }
 
   async createInfo(videoId: number, dto: CreateVideoInfoDto, files: VideoInfoFiles): Promise<VideoInfo> {
-
-    const { trailers, pictures } = await this.saveFile(files.trailers, files.pictures);
-    dto.trailers = trailers;
-    dto.pictures = pictures;
+    dto.pictures = await this.savePictures(files.pictures);
     return await this.videoInfoRepository.save(dto);
   }
 
   async updateInfo(videoId: number, dto: UpdateVideoInfoDto, files: VideoInfoFiles): Promise<VideoInfo> {
     const videoInfo = await this.videoInfoRepository.findOne({ where: { id: dto.id } });
-    const { trailers, pictures } = await this.saveFile(files.trailers, files.pictures);
+    const pictures = await this.savePictures(files.pictures);
 
     if (dto.mainCharacters)
       videoInfo.mainCharacters = [...videoInfo.mainCharacters, ...dto.mainCharacters];
-    if (trailers)
-      videoInfo.trailers = [...videoInfo.trailers, ...trailers];
+    if (dto.trailers)
+      videoInfo.trailers = [...videoInfo.trailers, ...dto.trailers];
     if (pictures)
       videoInfo.pictures = [...videoInfo.pictures, ...pictures];
 
@@ -72,8 +69,7 @@ export class VideoInfoService {
     return await this.videoInfoRepository.save(dto);
   }
 
-  async saveFile(trailers: Express.Multer.File[],
-                 pictures: Express.Multer.File[]) {
+  async saveTrailers(trailers: Express.Multer.File[]) {
     const newTrailers: string[] = [];
     if (trailers) {
       for (const trailer of trailers) {
@@ -81,6 +77,11 @@ export class VideoInfoService {
         newTrailers.push(name);
       }
     }
+    return newTrailers;
+  }
+
+  async savePictures(
+    pictures: Express.Multer.File[]) {
 
     const newPictures: string[] = [];
     if (pictures) {
@@ -90,6 +91,6 @@ export class VideoInfoService {
       }
     }
 
-    return { trailers: newTrailers, pictures: newPictures };
+    return newPictures;
   }
 }

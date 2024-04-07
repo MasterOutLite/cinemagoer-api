@@ -44,11 +44,6 @@ import { ConfigModule } from "@nestjs/config";
   imports: [
     ConfigModule.forRoot({ envFilePath: `.${process.env.NODE_ENV}.env` }),
     CommandModule,
-    //for productive
-    //ServeStaticModule.forRoot({rootPath: path.resolve(__dirname, 'static'),}),
-    //for development
-    ServeStaticModule.forRoot({ rootPath: path.resolve(__dirname, "..", "static") }),
-
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.POSTGRES_HOST,
